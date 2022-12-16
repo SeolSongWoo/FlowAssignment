@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.flow.flowassignment.service.ExtensionMapper">
+    <select id="ExOverLabCheck" resultType="int">
+        SELECT count(ex_id) FROM extension WHERE 1=1 AND ex_name = #{ex_name}
+    </select>
+
+    <insert id="ExtensionAdd">
+        INSERT INTO extension(ex_name,ex_regdate) VALUES (#{ex_name},now())
+    </insert>
+
+
+</mapper>
