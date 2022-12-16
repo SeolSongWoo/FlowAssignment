@@ -12,5 +12,13 @@
         INSERT INTO extension(ex_name,ex_regdate) VALUES (#{ex_name},now())
     </insert>
 
+    <delete id="ExtensionAdd">
+        DELETE FROM extension WHERE ex_name = #{ex_name}
+    </delete>
+
+    <select id="ExtensionList" resultType="EXTENSION">
+        SELECT ex_name FROM extension WHERE 1=1 ORDER BY ex_regdate DESC
+    </select>
+
 
 </mapper>

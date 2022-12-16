@@ -17,42 +17,160 @@
         <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-
+    <style>
+        #loading {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: fixed;
+            display: block;
+            background: #ededed;
+            opacity: 0.7;
+            z-index: 100001;
+            text-align: center;
+        }
+        #loading > #loading_bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 100002;
+            transform: translate(-50%,-50%);
+        }
+    </style>
     <script>
         $(function (){
             $("input[name='BasicExtensionN']").click(function () {
                 const BasicValue = {
-                    BasicValue : $(this).val()
+                    Value : $(this).val()
                 };
-                if(BasicValue.BasicValue == null || BasicValue.BasicValue == '') {
+                if(BasicValue.Value == null || BasicValue.Value == '') {
                     alert("잘못된 경로로 접근하였습니다.");
                     return;
                 }
                if($(this).is(":checked")) {
-                   $.ajax({
-                       type : "POST"
-                       , url : "/extensionadd"
-                       , async : false                      //동기 처리
-                       , dataType : "json"
-                       , data : BasicValue
-                       , success : function(res){
-                           if(res.rt == "ok"){
-                                alert("확장자 등록이 완료되었습니다.");
-                           }else {
-                               alert(res.rt);
-                               return;
-                           }
-                       }
-                   });
+                   BasicExtensionADD(BasicValue);
                }else {
-                   console.log($(this).val());
+                   BasicExtensionDEL(BasicValue);
                }
             });
+
+            $('#ExtensionAdd').on('click',function() {
+                let CustomValue = $.trim($('#ExtensionText').val());
+                if(CustomValue.length > 20) {
+                    alert("최대 입력 길이는 20글자입니다.");
+                    return;
+                }
+                $("input[name='BasicExtensionN']").each(function() {
+                    if(this.value == CustomValue) {
+                        alert("고정 확장자로 등록되어있는 확장자입니다.");
+                        return;
+                    }
+                });
+                CustomValue = {Value : CustomValue};
+                CustomExtensionADD(CustomValue);
+
+            });
         });
+
+        function BasicExtensionADD (BasicValue) {
+            $.ajax({
+                type : "POST"
+                , url : "/extensionadd"
+                , dataType : "json"
+                , data : BasicValue
+                , success : function(res){
+                    if(res.rt == "ok"){
+                        alert("확장자 등록이 완료되었습니다.");
+                    }else if(res.rt == "Null") {
+                        alert("정상적인 경로로 접근해주십시오.");
+                    }else {
+                        alert(res.rt);
+                        return;
+                    }
+                }
+                , beforeSend: function() {
+                    $('#loading').show();
+                }
+                , complete: function() {
+                    $('#loading').hide();
+                }
+                , error: function(request,status,error) {
+                    alert(`ERROR CODE:"\${request.status}\n 서버와의 통신에 실패하였습니다.`);
+                }
+            });
+        }
+
+        function BasicExtensionDEL(BasicValue) {
+            $.ajax({
+                type : "POST"
+                , url : "/extensiondel"
+                , dataType : "json"
+                , data : BasicValue
+                , success : function(res){
+                    if(res.rt == "ok"){
+                        alert("정상적으로 삭제되었습니다.");
+                    }else if(res.rt == "Null") {
+                        alert("정상적인 경로로 접근해주십시오.");
+                    }else {
+                        alert(res.rt);
+                        return;
+                    }
+                }
+                , beforeSend: function() {
+                    $('#loading').show();
+                }
+                , complete: function() {
+                    $('#loading').hide();
+                }
+                , error: function(request,status,error) {
+                    alert(`ERROR CODE:"\${request.status}\n 서버와의 통신에 실패하였습니다.`);
+                }
+            });
+        }
+
+        function CustomExtensionADD(CustomValue) {
+            $.ajax({
+                type : "POST"
+                , url : "/extensionadd"
+                , dataType : "json"
+                , data : CustomValue
+                , success : function(res){
+                    if(res.rt == "ok"){
+                        alert("확장자 등록이 완료되었습니다.");
+                    }else if(res.rt == "Null") {
+                        alert("정상적인 경로로 접근해주십시오.");
+                    }
+                    else {
+                        alert(res.rt);
+                        return;
+                    }
+                }
+                , beforeSend: function() {
+                    $('#loading').show();
+                }
+                , complete: function() {
+                    $('#loading').hide();
+                }
+                , error: function(request,status,error) {
+                    alert(`ERROR CODE:"\${request.status}\n 서버와의 통신에 실패하였습니다.`);
+                }
+            });
+        }
+
+        function CustomExtensionDEL(CustomValue) {
+
+        }
 
     </script>
 
     <body class="sb-nav-fixed">
+    <div id="loading" style="display: none;">
+        <div id="loading_bar">
+            <img src="resources/img/spinloading.gif">
+            <p style="font-size: x-large; font-weight: bold;">로딩 중</p>
+        </div>
+    </div>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.html">파일 확장자설정</a>
@@ -118,7 +236,7 @@
                                 </div>
                                 <div style="margin-bottom: 10px;">
                                     <li style="display: inline-block; padding-right: inherit;">커스텀 확장자</li>
-                                    <input id="CustomExtension"type="text" placeholder="확장자 입력"/>
+                                    <input id="CustomExtension"type="text" placeholder="확장자 입력" id="ExtensionText"/>
                                     <button class="btn btn-secondary" id="ExtensionAdd">+추가</button>
                                 </div>
                                 <div style="margin-left: 130px; border: 1px solid gray; width:50%; height: 300px; border-radius:10px;">
