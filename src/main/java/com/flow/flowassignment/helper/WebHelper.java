@@ -38,19 +38,16 @@ public class WebHelper {
     }
 
     public String getString(String fieldName, String defaultValue) {
-        // 리턴을 위한 값을 두 번째 파라미터(기본값)로 설정해 둔다.
         String result = defaultValue;
-        // GET,POST 파라미터를 받는다.
         String param = this.request.getParameter(fieldName);
 
-        if (param != null) { // 값이 null이 아니라면?
-            param = param.trim(); // 앞뒤 공백을 제거한다.
-            if (!param.equals("")) { // 공백제거 결과가 빈 문자열이 아니라면?
-                result = param; // 리턴을 위해서 준비한 변수에 수신한 값을 복사한다.
+        if (param != null) {
+            param = param.trim();
+            if (!param.equals("")) {
+                result = param;
             }
         }
 
-        // 값을 리턴. param값이 존재하지 않을 경우 미리 준비한 기본값이 그대로 리턴된다.
         return result;
     }
 

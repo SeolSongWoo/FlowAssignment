@@ -5,19 +5,23 @@
 
 <mapper namespace="com.flow.flowassignment.service.ExtensionMapper">
     <select id="ExOverLabCheck" resultType="int">
-        SELECT count(ex_id) FROM extension WHERE 1=1 AND ex_name = #{ex_name}
+        SELECT count(ex_id) FROM extension WHERE 1=1 AND ex_name = LOWER(#{ex_name})
     </select>
 
     <insert id="ExtensionAdd">
-        INSERT INTO extension(ex_name,ex_regdate) VALUES (#{ex_name},now())
-    </insert>
+        INSERT INTO extension(ex_name,ex_regdate,ex_sort) VALUES (LOWER(#{ex_name}),now(),UPPER(#{ex_sort}))
+     </insert>
 
-    <delete id="ExtensionAdd">
-        DELETE FROM extension WHERE ex_name = #{ex_name}
+    <delete id="ExtensionDel">
+        DELETE FROM extension WHERE ex_name = LOWER(#{ex_name})
     </delete>
 
     <select id="ExtensionList" resultType="EXTENSION">
-        SELECT ex_name FROM extension WHERE 1=1 ORDER BY ex_regdate DESC
+        SELECT ex_name,ex_sort FROM extension WHERE 1=1 AND ex_sort = UPPER(#{ex_sort})
+    </select>
+
+    <select id="ExtensionCount" resultType="int">
+        SELECT count(ex_id) FROM extension WHERE 1=1 AND ex_name = UPPER(#{ex_sort})
     </select>
 
 
