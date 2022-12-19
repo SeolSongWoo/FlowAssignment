@@ -98,7 +98,7 @@
                                 <div style="margin-left: 130px; border: 1px solid gray; width:50%; height: 300px; border-radius:10px; padding-top: 10px; padding-bottom: 10px; overflow: auto;">
                                     <p>${excount}/300</p>
                                     <c:forEach var="datalist" items="${ExCustomList}">
-                                        <button type="button" id="btn_${datalist.ex_name}" name="CustomBtnDelete" value="${datalist.ex_name}" class="btn btn-danger btn-xs">${datalist.ex_name}  <span class="glyphicon glyphicon-remove"></span></button>
+                                        <button type="button" id="btn_${datalist.ex_name}" name="CustomDeleteBtn" value="${datalist.ex_name}" class="btn btn-danger btn-xs">${datalist.ex_name}  <span class="glyphicon glyphicon-remove"></span></button>
                                     </c:forEach>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 $(function (){
     $("input[name='BasicExtensionN']").on('click',BasicCheckBoxClick);
     $('#CustomExtensionAdd').on('click',CustomAddButtonClick);
-    $("button[name=CustomBtnDelete]").on('click',CustomDeleteButtonClick);
+    $("button[name=CustomDeleteBtn]").on('click',CustomDeleteButtonClick);
 });
 
 //체크박스 클릭(고정확장자)
