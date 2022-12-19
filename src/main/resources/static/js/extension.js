@@ -1,9 +1,6 @@
-$(function (){
-    //$("input[name='BasicExtensionN']").on('click',BasicCheckBoxClick);
-    $('#CustomExtensionAdd').on('click',CustomAddButtonClick);
-    $("button[name=CustomDeleteBtn]").on('click',CustomDeleteButtonClick);
-});
 $(document).on('change','.pad-inher',BasicCheckBoxClick);
+$(document).on('click','#CustomExtensionAdd',CustomAddButtonClick);
+$(document).on('click','button[name=CustomDeleteBtn]',CustomDeleteButtonClick);
 
 
 

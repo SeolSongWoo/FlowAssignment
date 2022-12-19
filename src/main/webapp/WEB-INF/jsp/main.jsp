@@ -73,7 +73,7 @@
                                 <div class="padding10">
                                     <li class="listyle">커스텀 확장자</li>
                                     <input id="CustomExtensionText"type="text" placeholder="확장자 입력"/>
-                                    <button class="btn btn-secondary" id="CustomExtensionAdd">+추가</button>
+                                    <button class="btn btn-secondary " id="CustomExtensionAdd">+추가</button>
                                 </div>
                                 <div class="basic-view">
                                     <p>${excount}/300</p>
