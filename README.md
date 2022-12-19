@@ -34,4 +34,4 @@
 ID : admin  
 Password : 1234
   
-jenkins : http://43.200.53.112/jenkins
+jenkins : http://43.200.53.112/jenkinsfdsafasdfsda
