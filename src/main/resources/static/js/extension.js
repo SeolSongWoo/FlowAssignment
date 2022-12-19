@@ -79,8 +79,8 @@ class ExtensionAjax{
 
     /**
      * Ajax Body Constructor
-     * @Param Only Json Object
-     * @description JsonObject must have 'Name' and 'Sort'.
+     * @Param Object
+
      */
     constructor(Value) {
         this.Value = Value;
@@ -93,16 +93,12 @@ class ExtensionAjax{
      */
     async add(Type,url) {
         const Value = this.Value;
-        if(Type === null || Value.Sort === null || Value.Name === null){
-            return new Error ('Object NULL Exception');
-        }else {
             const result = await this.#Ajax(Type,url,Value);
             if(result === 1) {
                 return;
             }else {
                 return new Error ('Ajax Failed');
             }
-        }
     }
 
     /**
@@ -112,16 +108,12 @@ class ExtensionAjax{
      */
     async del(Type,url) {
         const Value = this.Value;
-        if(Type === null || Value.Sort === null || Value.Name === null){
-            return new Error('Object NULL Exception');
-        }else {
             const result = await this.#Ajax(Type,url,Value);
             if(result === 1) {
                 return;
             }else {
                 return new Error ('Ajax Failed');
             }
-        }
     }
 
     #Ajax(Type,url,Value) {
