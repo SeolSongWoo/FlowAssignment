@@ -1,11 +1,16 @@
 $(function (){
-    $("input[name='BasicExtensionN']").on('click',BasicCheckBoxClick);
+    //$("input[name='BasicExtensionN']").on('click',BasicCheckBoxClick);
     $('#CustomExtensionAdd').on('click',CustomAddButtonClick);
     $("button[name=CustomDeleteBtn]").on('click',CustomDeleteButtonClick);
 });
+$(document).on('change','.pad-inher',BasicCheckBoxClick);
+
+
+
 
 //체크박스 클릭(고정확장자)
-async function BasicCheckBoxClick() {
+async function BasicCheckBoxClick(e) {
+    e.stopImmediatePropagation();
     const BasicValue = {
         Name : $(this).val(),
         Sort : 'BASIC'
@@ -126,7 +131,7 @@ class ExtensionAjax{
                     , success : function(res){
                         resolve(1);
                         if(res.rt == "ok"){
-                            location.reload();
+                            $("#reloaddiv").load(location.href+" #reloaddiv>*","");
                         }else if(res.rt == "Null") {
                             alert("정상적인 경로로 접근해주십시오.");
                         }else {
