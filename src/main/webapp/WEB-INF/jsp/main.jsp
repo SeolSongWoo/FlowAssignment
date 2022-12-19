@@ -14,30 +14,10 @@
         <meta name="author" content="" />
         <title>파일 확장자설정</title>
         <link href="resources/bootstrap/css/styles.css" rel="stylesheet" />
+        <link href="resources/customcss/customcss.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-    <style>
-        #loading {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            position: fixed;
-            display: block;
-            background: #ededed;
-            opacity: 0.7;
-            z-index: 100001;
-            text-align: center;
-        }
-        #loading > #loading_bar {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 100002;
-            transform: translate(-50%,-50%);
-        }
-    </style>
     <body class="sb-nav-fixed">>
     <div id="loading" style="display: none;">
         <div id="loading_bar">
@@ -79,23 +59,23 @@
                             파일 확장자 차단
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div style="margin-bottom: 20px;">
-                                    <li style="display: inline-block; padding-right: inherit;">고정 확장자</li>
-                                    <label style="padding-right: inherit" for="ex_bat"><input type="checkbox" id="ex_bat" name="BasicExtensionN" style="padding-right: inherit" value="bat"<c:if test="${fn:contains(ExBasicList,'bat')}" >checked</c:if>/>bat</label>
-                                    <label style="padding-right: inherit" for="ex_cmd"><input type="checkbox" id="ex_cmd" name="BasicExtensionN" style="padding-right: inherit" value="cmd"<c:if test="${fn:contains(ExBasicList,'cmd')}" >checked</c:if>/>cmd</label>
-                                    <label style="padding-right: inherit" for="ex_com"><input type="checkbox" id="ex_com" name="BasicExtensionN" style="padding-right: inherit" value="com"<c:if test="${fn:contains(ExBasicList,'com')}" >checked</c:if>/>com</label>
-                                    <label style="padding-right: inherit" for="ex_cpl"><input type="checkbox" id="ex_cpl" name="BasicExtensionN" style="padding-right: inherit" value="cpl"<c:if test="${fn:contains(ExBasicList,'cpl')}" >checked</c:if>/>cpl</label>
-                                    <label style="padding-right: inherit" for="ex_exe"><input type="checkbox" id="ex_exe" name="BasicExtensionN" style="padding-right: inherit" value="exe"<c:if test="${fn:contains(ExBasicList,'exe')}" >checked</c:if>/>exe</label>
-                                    <label style="padding-right: inherit" for="ex_scr"><input type="checkbox" id="ex_scr" name="BasicExtensionN" style="padding-right: inherit" value="scr"<c:if test="${fn:contains(ExBasicList,'scr')}" >checked</c:if>/>scr</label>
-                                    <label style="padding-right: inherit" for="ex_js"><input type="checkbox" id="ex_js" name="BasicExtensionN" style="padding-right: inherit" value="js"<c:if test="${fn:contains(ExBasicList,'js')}" >checked</c:if>/>js</label>
+                            <div class="row" id="reloaddiv">
+                                <div class="padding20">
+                                    <li class="listyle">고정 확장자</li>
+                                    <label class="pad-inher" for="ex_bat"><input type="checkbox" id="ex_bat" name="BasicExtensionN" class="pad-inher" value="bat"<c:if test="${fn:contains(ExBasicList,'bat')}" >checked</c:if>/>bat</label>
+                                    <label class="pad-inher" for="ex_cmd"><input type="checkbox" id="ex_cmd" name="BasicExtensionN" class="pad-inher" value="cmd"<c:if test="${fn:contains(ExBasicList,'cmd')}" >checked</c:if>/>cmd</label>
+                                    <label class="pad-inher" for="ex_com"><input type="checkbox" id="ex_com" name="BasicExtensionN" class="pad-inher" value="com"<c:if test="${fn:contains(ExBasicList,'com')}" >checked</c:if>/>com</label>
+                                    <label class="pad-inher" for="ex_cpl"><input type="checkbox" id="ex_cpl" name="BasicExtensionN" class="pad-inher" value="cpl"<c:if test="${fn:contains(ExBasicList,'cpl')}" >checked</c:if>/>cpl</label>
+                                    <label class="pad-inher" for="ex_exe"><input type="checkbox" id="ex_exe" name="BasicExtensionN" class="pad-inher" value="exe"<c:if test="${fn:contains(ExBasicList,'exe')}" >checked</c:if>/>exe</label>
+                                    <label class="pad-inher" for="ex_scr"><input type="checkbox" id="ex_scr" name="BasicExtensionN" class="pad-inher" value="scr"<c:if test="${fn:contains(ExBasicList,'scr')}" >checked</c:if>/>scr</label>
+                                    <label class="pad-inher" for="ex_js"><input type="checkbox" id="ex_js" name="BasicExtensionN" class="pad-inher" value="js"<c:if test="${fn:contains(ExBasicList,'js')}" >checked</c:if>/>js</label>
                                 </div>
-                                <div style="margin-bottom: 10px;">
-                                    <li style="display: inline-block; padding-right: inherit;">커스텀 확장자</li>
+                                <div class="padding10">
+                                    <li class="listyle">커스텀 확장자</li>
                                     <input id="CustomExtensionText"type="text" placeholder="확장자 입력"/>
                                     <button class="btn btn-secondary" id="CustomExtensionAdd">+추가</button>
                                 </div>
-                                <div style="margin-left: 130px; border: 1px solid gray; width:50%; height: 300px; border-radius:10px; padding-top: 10px; padding-bottom: 10px; overflow: auto;">
+                                <div class="basic-view">
                                     <p>${excount}/300</p>
                                     <c:forEach var="datalist" items="${ExCustomList}">
                                         <button type="button" id="btn_${datalist.ex_name}" name="CustomDeleteBtn" value="${datalist.ex_name}" class="btn btn-danger btn-xs">${datalist.ex_name}  <span class="glyphicon glyphicon-remove"></span></button>
