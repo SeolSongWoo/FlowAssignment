@@ -35,7 +35,8 @@
 - Java : 1.8  
 - Spring FramWork : Spring Boot 2.7.5  
   
-# 배포환경
+# 배포환경  
+- Cloude : AWS EC2
 - OS : Ubuntu 22.04 LTS  
 - Web Server : NGINX  
 - WAS : tomcat9  
