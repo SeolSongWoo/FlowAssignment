@@ -39,6 +39,7 @@
 - OS : Ubuntu 22.04 LTS  
 - Web Server : NGINX  
 - WAS : tomcat9  
+- RDBMS : Postgresql
 - CI/CD : Jenkins  
   
 # 접속정보
