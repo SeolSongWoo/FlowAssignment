@@ -7,7 +7,7 @@ $(document).on('click','button[name=CustomDeleteBtn]',CustomDeleteButtonClick);
 
 //체크박스 클릭(고정확장자)
 async function BasicCheckBoxClick(e) {
-    e.stopImmediatePropagation();
+    e.stopPropagation();
     const BasicValue = {
         Name : $(this).val(),
         Sort : 'BASIC'
@@ -29,6 +29,7 @@ async function BasicCheckBoxClick(e) {
 
 //커스텀 확장자 추가 버튼 클릭
 async function CustomAddButtonClick () {
+    e.stopPropagation();
     let CustomValue = $('#CustomExtensionText').val().replace(/ /g, '');
     const regex = /^[a-z|A-Z|0-9|]+$/;
 
@@ -61,6 +62,7 @@ async function CustomAddButtonClick () {
 
 //커스텀 확장자 삭제 버튼
 async function CustomDeleteButtonClick (){
+    e.stopPropagation();
     let CustomValue = {
         Name : $(this).val(),
         Sort : 'CUSTOM'
@@ -97,7 +99,7 @@ class ExtensionAjax{
         const Value = this.Value;
             const result = await this.#Ajax(Type,url,Value);
             if(result === 1) {
-                return;
+                return result;
             }else {
                 return new Error ('Ajax Failed');
             }
@@ -112,7 +114,7 @@ class ExtensionAjax{
         const Value = this.Value;
             const result = await this.#Ajax(Type,url,Value);
             if(result === 1) {
-                return;
+                return result;
             }else {
                 return new Error ('Ajax Failed');
             }
