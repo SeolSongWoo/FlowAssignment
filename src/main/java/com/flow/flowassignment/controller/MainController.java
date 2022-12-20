@@ -62,7 +62,7 @@ public class MainController {
         int OverLabCheck = 0;
         int ExCount = 0;
 
-        if(Name == null || Name == "") { web.printJsonRt("Null"); return;}
+        if(Name == null || Name == "") { web.printJsonRt("정상적인 경로로 접근해주십시오."); return;}
         if(!(Sort.equals("BASIC") || Sort.equals("CUSTOM"))) { web.printJsonRt("정상적인 경로로 접근해주세요."); return; }
         if(Name.length() > 20) { web.printJsonRt("최대 입력 길이는 20글자입니다."); return;}
 
@@ -97,7 +97,7 @@ public class MainController {
 
         String Name = web.getString("Name",null);
 
-        if(Name == null || Name == "") { web.printJsonRt("Null"); return;}
+        if(Name == null || Name == "") { web.printJsonRt("정상적인 경로로 접근해주십시오."); return;}
         if(Name.length() > 20) { web.printJsonRt("최대 입력 길이는 20글자입니다."); return;};
 
         try {

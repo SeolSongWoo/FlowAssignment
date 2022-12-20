@@ -135,11 +135,8 @@ class ExtensionAjax{
                         resolve(1);
                         if(res.rt == "ok"){
                             $("#reloaddiv").load(location.href+" #reloaddiv>*","");
-                        }else if(res.rt == "Null") {
-                            alert("정상적인 경로로 접근해주십시오.");
-                        }else {
+                        } else {
                             alert(res.rt);
-                            return;
                         }
                     }
                     , beforeSend: function() {
