@@ -33,7 +33,7 @@
 # 제작환경  
 - IDE : IntelliJ  
 - Java : 1.8  
-- FrameWork : Spring Boot 2.7.5  
+- Spring FramWork : Spring Boot 2.7.5  
   
 # 배포환경
 - OS : Ubuntu 22.04 LTS  
