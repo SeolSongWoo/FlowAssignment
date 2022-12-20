@@ -29,9 +29,18 @@
 10. Jenkins를 활용하여 CI/CD구축.
 - 배포 주기 단축 및 사용자의 피드백등을 고려하여 구축.  배포가 완료되면 메일로 알림.
 
-
-
-
+  
+# 제작환경  
+- IDE : IntelliJ  
+- Java : 1.8  
+- FrameWork : Spring Boot 2.7.5  
+  
+# 배포환경
+- OS : Ubuntu 22.04 LTS  
+- Web Server : NGINX  
+- WAS : tomcat9  
+- CI/CD : Jenkins  
+  
 # 접속정보
 프로젝트 : http://43.200.53.112/  
 ID : admin  
