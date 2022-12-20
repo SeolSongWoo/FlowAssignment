@@ -41,7 +41,15 @@
 - WAS : tomcat9  
 - RDBMS : Postgresql
 - CI/CD : Jenkins  
-  
+
+# ERD
+|칼럼명|타입|속성|
+|------|---|---|
+|ex_id|Integer|NOT NULL,PK|
+|ex_name|Character Varyring(20)|NOT NULL,UNIQUE|
+|ex_sort|Character Varyring(6)|NOT NULL|
+|ex_regdate|TimeStamp With TimeZone|NOT NULL|
+
 # 접속정보
 프로젝트 : http://43.200.53.112/  
 ID : admin  
