@@ -28,7 +28,7 @@ async function BasicCheckBoxClick(e) {
 }
 
 //커스텀 확장자 추가 버튼 클릭
-async function CustomAddButtonClick () {
+async function CustomAddButtonClick (e) {
     e.stopPropagation();
     let CustomValue = $('#CustomExtensionText').val().replace(/ /g, '');
     const regex = /^[a-z|A-Z|0-9|]+$/;
@@ -61,7 +61,7 @@ async function CustomAddButtonClick () {
 }
 
 //커스텀 확장자 삭제 버튼
-async function CustomDeleteButtonClick (){
+async function CustomDeleteButtonClick (e){
     e.stopPropagation();
     let CustomValue = {
         Name : $(this).val(),
