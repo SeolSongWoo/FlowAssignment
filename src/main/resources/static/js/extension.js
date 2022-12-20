@@ -30,6 +30,7 @@ async function BasicCheckBoxClick(e) {
 //커스텀 확장자 추가 버튼 클릭
 async function CustomAddButtonClick (e) {
     e.stopPropagation();
+    const excount = $('#CustomExCount').val();
     let CustomValue = $('#CustomExtensionText').val().replace(/ /g, '');
     const regex = /^[a-z|A-Z|0-9|]+$/;
 
@@ -39,6 +40,9 @@ async function CustomAddButtonClick (e) {
     }
     else if(CustomValue.length > 20) {
         alert("최대 입력 길이는 20글자입니다.");
+        return;
+    } else if(excount >= 300) {
+        alert("등록가능 확장자의 갯수는 300개입니다.");
         return;
     }
     try {

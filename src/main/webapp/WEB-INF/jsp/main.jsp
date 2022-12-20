@@ -76,6 +76,7 @@
                                     <button class="btn btn-secondary " id="CustomExtensionAdd">+추가</button>
                                 </div>
                                 <div class="basic-view">
+                                    <input type="hidden" value="${excount}" id="CustomExCount" />
                                     <p>${excount}/300</p>
                                     <c:forEach var="datalist" items="${ExCustomList}">
                                         <button type="button" id="btn_${datalist.ex_name}" name="CustomDeleteBtn" value="${datalist.ex_name}" class="btn btn-danger btn-xs">${datalist.ex_name}  <span class="glyphicon glyphicon-remove"></span></button>

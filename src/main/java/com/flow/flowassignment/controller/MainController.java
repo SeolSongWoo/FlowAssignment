@@ -60,6 +60,7 @@ public class MainController {
 
         EXTENSION extension = new EXTENSION();
         int OverLabCheck = 0;
+        int ExCount = 0;
 
         if(Name == null || Name == "") { web.printJsonRt("Null"); return;}
         if(!(Sort.equals("BASIC") || Sort.equals("CUSTOM"))) { web.printJsonRt("정상적인 경로로 접근해주세요."); return; }
@@ -69,6 +70,8 @@ public class MainController {
         extension.setEx_sort(Sort);
 
         try {
+            ExCount = exService.ExtensionCount("CUSTOM");
+            if(ExCount >= 300) { throw new Exception("등록가능 확장자의 갯수는 300개입니다."); }
             OverLabCheck = exService.ExOverLabCheck(Name);
         }catch (Exception e) {
             web.printJsonRt(e.getMessage());
