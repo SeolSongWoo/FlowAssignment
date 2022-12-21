@@ -101,12 +101,14 @@ class ExtensionAjax{
      */
     async add(Type,url) {
         const Value = this.Value;
-            const result = await this.#Ajax(Type,url,Value);
-            if(result === 1) {
-                return result;
-            }else {
-                return new Error ('Ajax Failed');
-            }
+        if(Value == null) { return new Error ('NULL Object Exception');}
+
+        const result = await this.#Ajax(Type,url,Value);
+        if(result === 1) {
+            return result;
+        }else {
+            return new Error ('Ajax Failed');
+        }
     }
 
     /**
@@ -116,12 +118,14 @@ class ExtensionAjax{
      */
     async del(Type,url) {
         const Value = this.Value;
-            const result = await this.#Ajax(Type,url,Value);
-            if(result === 1) {
-                return result;
-            }else {
-                return new Error ('Ajax Failed');
-            }
+        if(Value == null) { return new Error ('NULL Object Exception');}
+
+        const result = await this.#Ajax(Type,url,Value);
+        if(result === 1) {
+            return result;
+        }else {
+            return new Error ('Ajax Failed');
+        }
     }
 
     #Ajax(Type,url,Value) {
