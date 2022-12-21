@@ -29,8 +29,27 @@
 10. Jenkins를 활용하여 CI/CD구축.
 - 배포 주기 단축 및 사용자의 피드백등을 고려하여 구축.  배포가 완료되면 메일로 알림.
 
+  
+# 제작환경  
+- IDE : IntelliJ  
+- Java : 1.8  
+- Spring FramWork : Spring Boot 2.7.5  
+  
+# 배포환경  
+- Cloude : AWS EC2
+- OS : Ubuntu 22.04 LTS  
+- Web Server : NGINX  
+- WAS : tomcat9  
+- RDBMS : Postgresql
+- CI/CD : Jenkins  
 
-
+# ERD
+|칼럼명|타입|속성|
+|------|---|---|
+|ex_id|Integer|NOT NULL,PK|
+|ex_name|Character Varyring(20)|NOT NULL,UNIQUE|
+|ex_sort|Character Varyring(6)|NOT NULL|
+|ex_regdate|TimeStamp With TimeZone|NOT NULL|
 
 # 접속정보
 프로젝트 : http://43.200.53.112/  
