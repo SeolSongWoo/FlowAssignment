@@ -66,8 +66,6 @@ public class MainController {
         if(!(Sort.equals("BASIC") || Sort.equals("CUSTOM"))) { web.printJsonRt("정상적인 경로로 접근해주세요."); return; }
         if(Name.length() > 20) { web.printJsonRt("최대 입력 길이는 20글자입니다."); return;}
 
-        extension.setEx_name(Name);
-        extension.setEx_sort(Sort);
 
         try {
             ExCount = exService.ExtensionCount("CUSTOM");
