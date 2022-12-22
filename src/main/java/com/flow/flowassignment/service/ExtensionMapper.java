@@ -2,9 +2,11 @@ package com.flow.flowassignment.service;
 
 
 import com.flow.flowassignment.model.EXTENSION;
+import com.flow.flowassignment.model.USER;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface ExtensionMapper {
@@ -58,4 +60,6 @@ public interface ExtensionMapper {
      * @throws Exception
      */
     int ExtensionCount(String ex_sort) throws  Exception;
+
+    Optional<USER> findByUserId(String name);
 }

@@ -1,11 +1,14 @@
 package com.flow.flowassignment.service.impl;
 
 import com.flow.flowassignment.model.EXTENSION;
+import com.flow.flowassignment.model.USER;
 import com.flow.flowassignment.service.ExtensionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExService implements ExtensionMapper {
@@ -67,5 +70,10 @@ public class ExService implements ExtensionMapper {
             throw new Exception("갯수 조회에 실패하였습니다.");
         }
         return result;
+    }
+
+    @Override
+    public Optional<USER> findByUserId(String name) {
+        return Optional.ofNullable(extensionMapper.findByUserId(name).orElseThrow(() -> new UsernameNotFoundException("없는 유저입니다.")));
     }
 }
