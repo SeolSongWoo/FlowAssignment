@@ -1,8 +1,8 @@
-package com.flow.flowassignment.service;
+package com.flow.flowassignment.service.impl;
 
 import com.flow.flowassignment.model.USER;
+import com.flow.flowassignment.service.ExtensionMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.ExtensionMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,13 +21,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return extensionMapper.findByUserId(username)
+        String user_id = username;
+        return extensionMapper.findByUserId(user_id)
                 .map(user -> addAuthorities(user))
-                .orElseThrow(() -> new UsernameNotFoundException(username + "> 찾을 수 없습니다."));
+                .orElseThrow(() -> new UsernameNotFoundException(user_id + "> 찾을 수 없습니다."));
     }
 
     private USER addAuthorities(USER user) {
-        user.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(user.getRole())));
+        user.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(user.getUser_role())));
 
         return user;
     }

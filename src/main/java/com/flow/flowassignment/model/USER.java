@@ -12,10 +12,12 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 public class USER implements UserDetails {
-    private int id;
-    private String username;
-    private String password;
-    private String role;
+    private int user_seq;
+
+    private String user_name;
+    private String user_id;
+    private String user_password;
+    private String user_role;
 
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -26,12 +28,12 @@ public class USER implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.password;
+        return this.user_password;
     }
 
     @Override
     public String getUsername() {
-        return this.username;
+        return this.user_id;
     }
 
     @Override

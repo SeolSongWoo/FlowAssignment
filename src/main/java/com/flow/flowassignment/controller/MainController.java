@@ -26,11 +26,7 @@ public class MainController {
     @Autowired
     ExService exService;
 
-    @GetMapping("/")
-    public String GotoMain() { return "redirect:/main";}
 
-    @GetMapping("/login")
-    public String login() {return "login";}
     @GetMapping("/main")
     public ModelAndView MainPage(HttpServletResponse response, Model model) {
         web.init(response);

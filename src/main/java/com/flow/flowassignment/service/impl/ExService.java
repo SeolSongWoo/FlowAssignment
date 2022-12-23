@@ -73,7 +73,7 @@ public class ExService implements ExtensionMapper {
     }
 
     @Override
-    public Optional<USER> findByUserId(String name) {
-        return Optional.ofNullable(extensionMapper.findByUserId(name).orElseThrow(() -> new UsernameNotFoundException("없는 유저입니다.")));
+    public Optional<USER> findByUserId(String user_id) {
+        return Optional.ofNullable(extensionMapper.findByUserId(user_id).orElseThrow(() -> new UsernameNotFoundException("없는 유저입니다.")));
     }
 }

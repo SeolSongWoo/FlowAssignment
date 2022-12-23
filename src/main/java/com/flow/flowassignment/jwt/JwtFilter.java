@@ -13,7 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,15 +26,13 @@ public class JwtFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
         String requestURI = ((HttpServletRequest) request).getRequestURI();
-
         if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            logger.info("Security context에 인증 정보를 저장했습니다");
         } else {
-            logger.debug("유효한 Jwt 토큰이 없습니다");
+            logger.info("유효한 Jwt 토큰이 없습니다");
         }
-
         chain.doFilter(request, response);
     }
+
 }

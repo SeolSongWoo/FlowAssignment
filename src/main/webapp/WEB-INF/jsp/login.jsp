@@ -16,10 +16,40 @@
   <title>Please sign in</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </head>
+<script>
+
+  function logincheck() {
+    const account = {
+        id : $('#username').val(),
+        password : $('#password').val(),
+    };
+
+    $.ajax({
+      type : "POST"
+      , url : "/login/check"
+      , dataType : "json"
+      , data : account
+      , success : function(data, textStatus, request){
+        if(data.rt === 'ok') {
+          location.href="/main";
+        }else {
+          alert(data.rt);
+        }
+      }
+      , beforeSend: function() {
+      }
+      , complete: function() {
+      }
+      , error: function(request,status,error) {
+      }
+    });
+  }
+</script>
 <body class="vsc-initialized">
 <div class="container">
-  <form class="form-signin" method="post" action="/login">
+  <div class="form-signin">
     <h2 class="form-signin-heading">Please sign in</h2>
     <p>
       <label for="username" class="sr-only">Username</label>
@@ -29,8 +59,8 @@
       <label for="password" class="sr-only">Password</label>
       <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
     </p>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  </form>
+    <button class="btn btn-lg btn-primary btn-block" onclick="logincheck();">Sign in</button>
+  </div>
 </div>
 </body>
 </html>

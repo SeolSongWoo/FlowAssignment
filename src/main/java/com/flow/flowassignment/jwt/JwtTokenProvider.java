@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
@@ -35,8 +36,8 @@ public class JwtTokenProvider {
     }
 
     // JWT 토큰 생성
-    public String createToken(Long userId, List<String> roles) {
-        Claims claims = Jwts.claims().setSubject(Long.toString(userId));
+    public String createToken(String user_id, String roles) {
+        Claims claims = Jwts.claims().setSubject(user_id);
         claims.put("roles", roles);
         Date now = new Date();
 
@@ -50,7 +51,7 @@ public class JwtTokenProvider {
 
     // JWT 토큰에서 인증 정보 조회
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserId(token));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserId(token));
 
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
@@ -66,13 +67,21 @@ public class JwtTokenProvider {
 
     // Request header에서 token 꺼내옴
     public String resolveToken(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-
-        // 가져온 Authorization Header 가 문자열이고, Bearer 로 시작해야 가져옴
-        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
-            return token.substring(7);
+        Cookie[] cookies = request.getCookies();
+        String token = null;
+        if(cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals("Authorization")) {
+                    token = cookies[i].getValue();
+                }
+            }
         }
-
+        if(token != null) {
+            // 가져온 Authorization Header 가 문자열이고, Bearer 로 시작해야 가져옴
+            if (StringUtils.hasText(token) && token.startsWith("Bearer")) {
+                return token.substring(7);
+            }
+        }
         return null;
     }
 

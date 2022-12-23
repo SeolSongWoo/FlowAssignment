@@ -61,5 +61,8 @@ public interface ExtensionMapper {
      */
     int ExtensionCount(String ex_sort) throws  Exception;
 
-    Optional<USER> findByUserId(String name);
+    Optional<USER> findByUserId(String user_id);
+
+
+
 }

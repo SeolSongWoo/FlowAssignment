@@ -23,6 +23,8 @@
     <select id="ExtensionCount" resultType="int">
         SELECT count(ex_id) FROM extension WHERE 1=1 AND ex_sort = UPPER(#{ex_sort})
     </select>
-
+    <select id="findByUserId" resultType="USER">
+        SELECT * FROM "user" WHERE 1=1 and user_id = #{user_id}
+    </select>
 
 </mapper>
