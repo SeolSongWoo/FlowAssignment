@@ -3,6 +3,7 @@ package com.flow.flowassignment.service.impl;
 import com.flow.flowassignment.model.EXTENSION;
 import com.flow.flowassignment.model.USER;
 import com.flow.flowassignment.service.ExtensionMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class ExService implements ExtensionMapper {
 
@@ -22,6 +24,7 @@ public class ExService implements ExtensionMapper {
         try {
             result = extensionMapper.ExOverLabCheck(ex_name);
         } catch(Exception e) {
+            log.error("DBServiceException",e);
             throw new Exception("중복 조회에 실패하였습니다.");
         }
         if(result != 0) throw new Exception("이미 등록된 확장자입니다.");
@@ -33,8 +36,10 @@ public class ExService implements ExtensionMapper {
         try {
             extensionMapper.ExtensionAdd(extension);
         } catch (NullPointerException e) {
+            log.error("DBServiceException",e);
             throw new Exception("저장된 데이터가 없습니다.");
         } catch (Exception e) {
+            log.error("DBServiceException",e);
             throw new Exception("데이터 저장에 실패했습니다.");
         }
     }
@@ -44,8 +49,10 @@ public class ExService implements ExtensionMapper {
         try {
             extensionMapper.ExtensionDel(ex_name);
         } catch (NullPointerException e) {
+            log.error("DBServiceException",e);
             throw new Exception("삭제된 데이터가 없습니다..");
         } catch (Exception e) {
+            log.error("DBServiceException",e);
             throw new Exception("데이터 삭제에 실패했습니다.");
         }
     }
@@ -56,6 +63,7 @@ public class ExService implements ExtensionMapper {
         try {
             result = extensionMapper.ExtensionList(ex_sort);
         } catch(Exception e) {
+            log.error("DBServiceException",e);
             throw new Exception("데이터 조회에 실패하였습니다.");
         }
         return result;
@@ -67,6 +75,7 @@ public class ExService implements ExtensionMapper {
         try {
             result = extensionMapper.ExtensionCount(ex_sort);
         } catch(Exception e) {
+            log.error("DBServiceException",e);
             throw new Exception("갯수 조회에 실패하였습니다.");
         }
         return result;

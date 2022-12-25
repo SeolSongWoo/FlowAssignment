@@ -18,43 +18,6 @@
   <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </head>
-<script>
-
-  function logincheck() {
-    const id = $('#username').val();
-    const password = $('#password').val();
-
-    if(id == ""  || password == "") {
-      alert("아이디 또는 비밀번호를 입력해주세요.");
-      return;
-    }
-
-    const account = {
-        'id' : id,
-        'password' : password,
-    };
-
-    $.ajax({
-      type : "POST"
-      , url : "/login/check"
-      , dataType : "json"
-      , data : account
-      , success : function(data, textStatus, request){
-        if(data.rt === 'ok') {
-          location.href="/main";
-        }else {
-          alert(data.rt);
-        }
-      }
-      , beforeSend: function() {
-      }
-      , complete: function() {
-      }
-      , error: function(request,status,error) {
-      }
-    });
-  }
-</script>
 <body class="vsc-initialized">
 <div class="container">
   <div class="form-signin">
@@ -70,5 +33,6 @@
     <button class="btn btn-lg btn-primary btn-block" onclick="logincheck();">Sign in</button>
   </div>
 </div>
+<script src="resources/js/login.js"></script>
 </body>
 </html>
