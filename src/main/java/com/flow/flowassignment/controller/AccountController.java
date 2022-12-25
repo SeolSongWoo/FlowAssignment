@@ -6,6 +6,7 @@ import com.flow.flowassignment.model.USER;
 import com.flow.flowassignment.service.impl.ExService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,9 @@ public class AccountController {
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 
+    @Value("${jwt.token-validity-in-seconds}")
+    private int cookie_maxtime;
+
     @GetMapping("/login")
     public String login() {return "login";}
 
@@ -44,6 +48,7 @@ public class AccountController {
         String id = web.getString("id",null);
         String password = web.getString("password",null);
 
+
         if(id == null || password == null) {web.printJsonRt("정상적인 경로로 접근해주세요.");}
         USER user = null;
 
@@ -55,9 +60,8 @@ public class AccountController {
         }
             if (user != null && passwordEncoder.matches(password, user.getPassword())) {
                 String token = jwtTokenProvider.createToken(user.getUser_id(), "ADMIN");
-                response.setHeader("Authorization", "Bearer " + token);
                 Cookie cookie = new Cookie("Authorization", URLEncoder.encode("Bearer " + token, "utf-8"));
-                cookie.setMaxAge(-1);
+                cookie.setMaxAge(cookie_maxtime/1000);
                 cookie.setPath("/");
                 cookie.setHttpOnly(true);
                 response.addCookie(cookie);

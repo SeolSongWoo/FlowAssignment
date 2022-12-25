@@ -67,7 +67,7 @@ async function CustomAddButtonClick (e) {
 //커스텀 확장자 삭제 버튼
 async function CustomDeleteButtonClick (e){
     e.stopPropagation();
-    let CustomValue = {
+    const CustomValue = {
         Name : $(this).val(),
         Sort : 'CUSTOM'
     };

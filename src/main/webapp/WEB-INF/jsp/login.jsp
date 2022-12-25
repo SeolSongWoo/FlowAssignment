@@ -21,9 +21,17 @@
 <script>
 
   function logincheck() {
+    const id = $('#username').val();
+    const password = $('#password').val();
+
+    if(id == ""  || password == "") {
+      alert("아이디 또는 비밀번호를 입력해주세요.");
+      return;
+    }
+
     const account = {
-        id : $('#username').val(),
-        password : $('#password').val(),
+        'id' : id,
+        'password' : password,
     };
 
     $.ajax({
