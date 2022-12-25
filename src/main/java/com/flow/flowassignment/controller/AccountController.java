@@ -39,7 +39,6 @@ public class AccountController {
 
     @PostMapping("/login/check")
     public void LoginCheck(HttpServletResponse response) throws UnsupportedEncodingException {
-        log.error("에러!");
         web.init(response);
 
         String id = web.getString("id",null);
@@ -54,17 +53,21 @@ public class AccountController {
             web.printJsonRt(e.getMessage());
             return;
         }
-        if(user != null && passwordEncoder.matches(password, user.getPassword())) {
-            String token = jwtTokenProvider.createToken(user.getUser_id(),"ADMIN");
-            response.setHeader("Authorization","Bearer "+token);
-            Cookie cookie = new Cookie("Authorization",URLEncoder.encode("Bearer "+token,"utf-8"));
-            cookie.setMaxAge(-1);
-            cookie.setPath("/");
-            cookie.setHttpOnly(true);
-            response.addCookie(cookie);
-            web.printJsonRt("ok");
-        }else {
-            web.printJsonRt("비밀번호를 제대로 입력해주세요.");
+        try {
+            if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+                String token = jwtTokenProvider.createToken(user.getUser_id(), "ADMIN");
+                response.setHeader("Authorization", "Bearer " + token);
+                Cookie cookie = new Cookie("Authorization", URLEncoder.encode("Bearer " + token, "utf-8"));
+                cookie.setMaxAge(-1);
+                cookie.setPath("/");
+                cookie.setHttpOnly(true);
+                response.addCookie(cookie);
+                web.printJsonRt("ok");
+            } else {
+                web.printJsonRt("비밀번호를 제대로 입력해주세요.");
+            }
+        } catch(Exception e) {
+            web.printJsonRt(e.toString());
         }
     }
 }

@@ -35,7 +35,7 @@
         if(data.rt === 'ok') {
           location.href="/main";
         }else {
-          alert(data.rt);
+          console.log(data.rt);
         }
       }
       , beforeSend: function() {
