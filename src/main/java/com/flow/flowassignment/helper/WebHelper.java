@@ -2,7 +2,6 @@ package com.flow.flowassignment.helper;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,14 +18,12 @@ public class WebHelper {
 
     private HttpServletResponse response;
     private HttpServletRequest request;
-    private HttpSession session;
 
     public void init(HttpServletResponse response){
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
         this.request = requestAttributes.getRequest();
         this.response = response;
-        this.session = request.getSession();
 
         try {
             // 인코딩 설정하기
