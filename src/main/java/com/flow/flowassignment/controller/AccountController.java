@@ -4,6 +4,7 @@ import com.flow.flowassignment.helper.WebHelper;
 import com.flow.flowassignment.jwt.JwtTokenProvider;
 import com.flow.flowassignment.model.USER;
 import com.flow.flowassignment.service.impl.ExService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+@Slf4j
 @Controller
 public class AccountController {
 
@@ -37,6 +39,7 @@ public class AccountController {
 
     @PostMapping("/login/check")
     public void LoginCheck(HttpServletResponse response) throws UnsupportedEncodingException {
+        log.error("에러!");
         web.init(response);
 
         String id = web.getString("id",null);

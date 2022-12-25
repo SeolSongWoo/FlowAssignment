@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true">
 
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./logs/flow/flowlog.log</file>
+        <encoder>
+            <pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-5level [%logger{0}:%line] - %msg %n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>flowlog.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
     <!-- 로그 레벨 -->
     <!--
     	1) ERROR : 오류 메시지 표시
@@ -24,6 +36,6 @@
     <root level="${LOG_LEVEL}">
         <!-- 위에 설정한 콘솔 설정 추가 -->
         <appender-ref ref="CONSOLE"/>
-
+        <appender-ref ref="file" />
     </root>
 </configuration>
