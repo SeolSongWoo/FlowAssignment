@@ -53,7 +53,6 @@ public class AccountController {
             web.printJsonRt(e.getMessage());
             return;
         }
-        try {
             if (user != null && passwordEncoder.matches(password, user.getPassword())) {
                 String token = jwtTokenProvider.createToken(user.getUser_id(), "ADMIN");
                 response.setHeader("Authorization", "Bearer " + token);
@@ -66,8 +65,5 @@ public class AccountController {
             } else {
                 web.printJsonRt("비밀번호를 제대로 입력해주세요.");
             }
-        } catch(Exception e) {
-            web.printJsonRt(e.toString());
-        }
     }
 }
