@@ -35,14 +35,19 @@ public class FlowAssignmentApplication extends SpringBootServletInitializer {
     }
 
     @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/login/check").permitAll()
+                .antMatchers("/login/**").permitAll()
                 .antMatchers("/main").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/resources/**").permitAll()
@@ -57,11 +62,6 @@ public class FlowAssignmentApplication extends SpringBootServletInitializer {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-            throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
 
 
 }
