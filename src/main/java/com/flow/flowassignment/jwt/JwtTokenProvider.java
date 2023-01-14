@@ -56,7 +56,7 @@ public class JwtTokenProvider {
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    // 유저 이름 추출
+    // payload 추출
     public String getUserId(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey)
@@ -65,7 +65,7 @@ public class JwtTokenProvider {
                 .getSubject();
     }
 
-    // Request header에서 token 꺼내옴
+    // Request Cookie에서 발행한 jwt토큰 추출.
     public String resolveToken(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         String token = null;
