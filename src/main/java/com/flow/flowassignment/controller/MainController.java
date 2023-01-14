@@ -3,6 +3,7 @@ package com.flow.flowassignment.controller;
 import com.flow.flowassignment.helper.WebHelper;
 import com.flow.flowassignment.model.EXTENSION;
 import com.flow.flowassignment.service.impl.ExService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
 
-    @Autowired
-    WebHelper web;
-
-    @Autowired
-    ExService exService;
+    private final WebHelper web;
+    private final ExService exService;
 
 
     @GetMapping("/main")
